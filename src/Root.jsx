@@ -17,7 +17,7 @@ export default function Root() {
   return (
     <div className="mainContainer">
       <header>
-        <h1>Just DO It</h1>
+        <h1>ToDo IT</h1>
         <h1>{counter}</h1>
         <button onClick={() => increaseCount()}>increase</button>
         <button onClick={() => resetCounter()}>reset</button>
