@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fascinate&display=swap');
+
 .mainContainer {
   min-height: 500px;
   min-width: 500px;
@@ -7,5 +9,8 @@
 }
 
 h1 {
-  font-size: 3.5em;
+  font-size: 4em;
+  font-family: 'Fascinate';
+  text-align: center;
+  color: #1c2c42;
 }

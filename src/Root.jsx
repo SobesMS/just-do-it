@@ -1,28 +1,32 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Plus, XrayView } from 'iconoir-react';
 import './Root.css';
+
+let nextId = 1;
 
 export default function Root() {
   const [todos, setTodos] = useState([]);
-  const [counter, setCounter] = useState(0);
+  const [completedTodos, setCompletedTodos] = useState([]);
 
-  const increaseCount = () => {
-    setCounter(counter + 1);
-  };
-
-  const resetCounter = () => {
-    setCounter(0);
+  const newTodo = (task, priority, notes) => {
+    const todo = {
+      id: nextId,
+      task: task,
+      priority: priority,
+      notes: notes,
+      completed: false,
+    };
+    nextId++;
+    setTodos([...todos, todo]);
   };
 
   return (
     <div className="mainContainer">
       <header>
         <h1>ToDo IT</h1>
-        <h1>{counter}</h1>
-        <button onClick={() => increaseCount()}>increase</button>
-        <button onClick={() => resetCounter()}>reset</button>
-        <Outlet />
       </header>
+      <Outlet />
     </div>
   );
 }
