@@ -7,7 +7,6 @@ let nextId = 1;
 
 export default function Root() {
   const [todos, setTodos] = useState([]);
-  const [completedTodos, setCompletedTodos] = useState([]);
 
   const newTodo = (task, priority, notes) => {
     const todo = {

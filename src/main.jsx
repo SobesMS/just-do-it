@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import Root from './Root.jsx';
 import TodoList from './components/todoList/TodoList.jsx';
 import NewTodo from './components/newTodo/NewTodo.jsx';
-import CompletedTodos from './components/completedTodos/CompletedTodos.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -18,10 +17,6 @@ const router = createBrowserRouter([
       {
         path: 'new-todo',
         element: <NewTodo />,
-      },
-      {
-        path: 'completed',
-        element: <CompletedTodos />,
       },
     ],
   },
