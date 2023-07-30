@@ -5,9 +5,11 @@ import './TodoList.css';
 export default function TodoList() {
   const [todos, setTodos] = useOutletContext();
 
-  // converts priority code to a string and returns an array of Todo components
-  const todoList = todos.map((todo) => {
+  const createTodo = (todo) => {
     let priorityText = '';
+    let className = 'incomplete';
+
+    // converts todo priority prop to a string
     if (todo.priority === 1) {
       priorityText = 'low';
     }
@@ -18,16 +20,19 @@ export default function TodoList() {
       priorityText = 'high';
     }
 
+    // sets className to 'complete' if todo completed prop is true
+    if (todo.completed === true) {
+      className = 'complete';
+    }
+
     return (
-      <li>
+      <li className={className} key={todo.id}>
         <Todo task={todo.task} notes={todo.notes} priority={priorityText} />
       </li>
     );
-  });
+  };
 
-  return (
-    <div className="listContainer">
-      <ul>{todoList}</ul>
-    </div>
-  );
+  const todoList = todos.map((todo) => createTodo(todo));
+
+  return <ul className="listContainer">{todoList}</ul>;
 }

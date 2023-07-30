@@ -3,9 +3,9 @@
 .mainContainer {
   min-height: 500px;
   min-width: 500px;
-  padding: 20px;
-  background-color: #bbc7d8;
-  border-radius: 30px;
+  padding: 10px;
+  background-color: #c4cedb;
+  border-radius: 20px;
 }
 
 h1 {
