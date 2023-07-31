@@ -1,34 +1,32 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Plus, XrayView } from 'iconoir-react';
-import localforage from 'localforage';
-import { populateSampleData, getSampleData } from './sampleData/sampleData';
+import { getTodos } from './utilities/storageUtil';
 import './Root.css';
 
 let nextId = 1;
 
 export default function Root() {
-  const [todos, setTodos] = useState([getSampleData()]);
-  const [showCompleted, setShowCompleted] = useState(false);
-
-  // localStorage.setItem('todos', JSON.stringify(sampleData));
-  populateSampleData();
-
-  useEffect(() => {
-    // setTodos(JSON.parse(localStorage.getItem('todos')));
-    setTodos(getSampleData());
-  }, []);
+  const [visibleTodos, setVisibleTodos] = useState(getTodos());
+  const [hideCompleted, setHideCompleted] = useState(false);
 
   // adds a todo to the todos state
   const addTodo = () => {};
 
   // deletes a todo from the todo state
-  const deleteTodo = () => {};
+  const deleteTodo = (id) => {
+    const index = visibleTodos.findIndex((todo) => todo.id === id);
+    if (index !== -1) {
+      const newTodos = visibleTodos.toSpliced(index, 1);
+      localStorage.removeItem(id);
+      setVisibleTodos(newTodos);
+    }
+  };
 
-  // sets showCompleted state
-  const toggleShowCompleted = () => {
+  // sets hideCompleted state
+  const hideCompletedTodos = () => {
     if (true) {
-      setShowCompleted(true);
+      setHideCompleted(true);
     }
   };
 
@@ -42,15 +40,26 @@ export default function Root() {
       completed: false,
     };
     nextId++;
-    setTodos([...todos, todo]);
+    setVisibleTodos([...visibleTodos, todo]);
   };
 
   return (
-    <div className="mainContainer">
-      <header>
-        <h1>ToDo IT</h1>
-      </header>
-      <Outlet context={[todos, setTodos]} />
+    <div>
+      <div className="mainContainer">
+        <header>
+          <div className="titleContainer">
+            <h1>ToDo IT</h1>
+            <input type="text" />
+            <button>Search</button>
+          </div>
+          <div className="optionsContainer">
+            <p>Hide completed</p>
+            <input type="checkbox" name="" id="" />
+          </div>
+        </header>
+        <Outlet context={[visibleTodos, deleteTodo]} />
+      </div>
+      <footer>&copy;2023 - Matt Sobek</footer>
     </div>
   );
 }

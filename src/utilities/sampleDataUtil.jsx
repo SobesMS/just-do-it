@@ -4,16 +4,6 @@ export const populateSampleData = () => {
   });
 };
 
-export const getSampleData = () => {
-  const data = [];
-  const keys = Object.keys(localStorage);
-  keys.sort();
-  for (let i in keys) {
-    data.push(JSON.parse(localStorage.getItem(keys[i])));
-  }
-  return data;
-};
-
 export const sampleData = [
   {
     id: 1978,
@@ -49,5 +39,12 @@ export const sampleData = [
     priority: 'medium',
     notes: 'buy steak',
     completed: true,
+  },
+  {
+    id: 1983,
+    task: 'study coding',
+    priority: 'high',
+    notes: 'remember laptop',
+    completed: false,
   },
 ];
