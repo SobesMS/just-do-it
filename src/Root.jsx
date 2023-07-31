@@ -1,14 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Plus, XrayView } from 'iconoir-react';
-import { sampleData } from './sampleData/sampleData';
+import localforage from 'localforage';
+import { populateSampleData, getSampleData } from './sampleData/sampleData';
 import './Root.css';
 
 let nextId = 1;
 
 export default function Root() {
-  const [todos, setTodos] = useState(sampleData);
+  const [todos, setTodos] = useState([getSampleData()]);
   const [showCompleted, setShowCompleted] = useState(false);
+
+  // localStorage.setItem('todos', JSON.stringify(sampleData));
+  populateSampleData();
+
+  useEffect(() => {
+    // setTodos(JSON.parse(localStorage.getItem('todos')));
+    setTodos(getSampleData());
+  }, []);
 
   // adds a todo to the todos state
   const addTodo = () => {};
