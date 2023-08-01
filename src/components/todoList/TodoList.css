@@ -3,11 +3,21 @@ ul {
   overflow-y: auto;
 }
 
-li > * {
-  /* border: 1px solid red; */
+img {
+  cursor: pointer;
 }
 
-img {
+.newTodoButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 40px;
+  margin: 15px auto 0 auto;
+  text-decoration: none;
+  color: #c4cedb;
+  background-color: #1c2c42;
+  border-radius: 15px;
   cursor: pointer;
 }
 

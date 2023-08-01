@@ -1,8 +1,8 @@
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, Link } from 'react-router-dom';
 import './TodoList.css';
 
 export default function TodoList() {
-  const [visibleTodos, deleteTodo] = useOutletContext();
+  const [visibleTodos, deleteTodo, toggleCompleted] = useOutletContext();
 
   const todoList = visibleTodos.map((todo) => {
     const setClass = (completed) => {
@@ -25,16 +25,22 @@ export default function TodoList() {
       <li key={todo.id} className={setClass(todo.completed)}>
         <img
           src={setCheckboxImage(todo.completed)}
-          onClick={() => console.log('clicked')}
+          onClick={() => toggleCompleted(todo.id)}
         />
         <h3>{todo.task}</h3>
-        {/* <p>{todo.notes}</p> */}
         <p>{todo.priority}</p>
-        <img src="src/assets/note.svg" />
+        <img src="src/assets/edit.svg" />
         <img src="src/assets/delete.svg" onClick={() => deleteTodo(todo.id)} />
       </li>
     );
   });
 
-  return <ul>{todoList}</ul>;
+  return (
+    <>
+      <Link to="/new-todo" className="newTodoButton">
+        <h3>New Todo</h3>
+      </Link>
+      <ul>{todoList}</ul>
+    </>
+  );
 }

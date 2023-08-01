@@ -1,33 +1,38 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Plus, XrayView } from 'iconoir-react';
 import { getTodos } from './utilities/storageUtil';
 import './Root.css';
 
 let nextId = 1;
 
 export default function Root() {
-  const [visibleTodos, setVisibleTodos] = useState(getTodos());
   const [hideCompleted, setHideCompleted] = useState(false);
+  const [visibleTodos, setVisibleTodos] = useState(getTodos(hideCompleted));
 
-  // adds a todo to the todos state
+  useEffect(() => {});
+
+  // adds a todo to localStorage and updates visibleTodos state
   const addTodo = () => {};
 
-  // deletes a todo from the todo state
+  // deletes a todo from localStorage and updates visibleTodos state
   const deleteTodo = (id) => {
-    const index = visibleTodos.findIndex((todo) => todo.id === id);
-    if (index !== -1) {
-      const newTodos = visibleTodos.toSpliced(index, 1);
-      localStorage.removeItem(id);
-      setVisibleTodos(newTodos);
-    }
+    localStorage.removeItem(id);
+    setVisibleTodos(getTodos(hideCompleted));
+  };
+
+  // marks a todo as completed in localStorage and updates visibleTodos state
+  const toggleCompleted = (id) => {
+    const todo = JSON.parse(localStorage.getItem(id));
+    todo.completed = !todo.completed;
+    localStorage.setItem(id, JSON.stringify(todo));
+    setVisibleTodos(getTodos(hideCompleted));
   };
 
   // sets hideCompleted state
   const hideCompletedTodos = () => {
-    if (true) {
-      setHideCompleted(true);
-    }
+    setHideCompleted(!hideCompleted);
+    console.log(`I ran! ${hideCompleted}`);
+    // setVisibleTodos(!hideCompleted);
   };
 
   // TODO - this function will move to the newTodo component
@@ -36,7 +41,6 @@ export default function Root() {
       id: nextId,
       task: task,
       priority: priority,
-      notes: notes,
       completed: false,
     };
     nextId++;
@@ -54,10 +58,15 @@ export default function Root() {
           </div>
           <div className="optionsContainer">
             <p>Hide completed</p>
-            <input type="checkbox" name="" id="" />
+            <input
+              type="checkbox"
+              name="hideCompleted"
+              checked={hideCompleted}
+              onChange={() => hideCompletedTodos()}
+            />
           </div>
         </header>
-        <Outlet context={[visibleTodos, deleteTodo]} />
+        <Outlet context={[visibleTodos, deleteTodo, toggleCompleted]} />
       </div>
       <footer>&copy;2023 - Matt Sobek</footer>
     </div>
