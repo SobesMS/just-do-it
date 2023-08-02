@@ -1,6 +1,6 @@
 header {
   display: grid;
-  grid-template: 1fr 10px / 1fr 125px;
+  grid-template-columns: 1fr 200px;
 }
 
 footer {
@@ -17,6 +17,7 @@ footer {
   padding: 10px;
   background-color: #c4cedb;
   border-radius: 20px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -30,24 +31,30 @@ footer {
 }
 
 .optionsContainer {
-  display: grid;
-  grid-template-columns: 1fr 15px;
-  grid-template-rows: 15px;
   gap: 10px;
   font-size: 0.9em;
 }
 
-.optionsContainer > * {
-  align-self: center;
-}
-
-.optionsContainer button {
-  grid-column: span 2;
+.newTodoButton {
+  position: relative;
+  top: 6px;
+  right: -12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 200px;
+  height: 40px;
+  text-decoration: none;
+  color: #c4cedb;
+  background-color: #1c2c42;
+  border-radius: 20px 0 0 20px;
+  cursor: pointer;
 }
 
 @media (max-width: 700px) {
   header {
-    grid-template: 1fr 10px / 1fr 110px;
+    grid-template-columns: 1fr 130px;
   }
 
   .mainContainer {
@@ -61,5 +68,10 @@ footer {
 
   .optionsContainer {
     grid-template-columns: 1fr 12px;
+  }
+
+  .newTodoButton {
+    width: 130px;
+    height: 30px;
   }
 }

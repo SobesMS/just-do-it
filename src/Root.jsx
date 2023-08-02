@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { getTodos } from './utilities/storageUtil';
 import './Root.css';
 
@@ -53,18 +53,11 @@ export default function Root() {
         <header>
           <div className="titleContainer">
             <h1>ToDo IT</h1>
-            <input type="text" />
-            <button>Search</button>
           </div>
-          <div className="optionsContainer">
-            <p>Hide completed</p>
-            <input
-              type="checkbox"
-              name="hideCompleted"
-              checked={hideCompleted}
-              onChange={() => hideCompletedTodos()}
-            />
-          </div>
+          <Link to="/new-todo" className="newTodoButton">
+            <img src="src/assets/add.svg" />
+            <h3>New Todo</h3>
+          </Link>
         </header>
         <Outlet context={[visibleTodos, deleteTodo, toggleCompleted]} />
       </div>

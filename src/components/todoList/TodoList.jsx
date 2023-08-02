@@ -1,4 +1,4 @@
-import { useOutletContext, Link } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import './TodoList.css';
 
 export default function TodoList() {
@@ -21,6 +21,8 @@ export default function TodoList() {
       }
     };
 
+    const hideEditFromCompleted = (completed) => {};
+
     return (
       <li key={todo.id} className={setClass(todo.completed)}>
         <img
@@ -29,18 +31,16 @@ export default function TodoList() {
         />
         <h3>{todo.task}</h3>
         <p>{todo.priority}</p>
-        <img src="src/assets/edit.svg" />
-        <img src="src/assets/delete.svg" onClick={() => deleteTodo(todo.id)} />
+        <div className="todoEditDeleteContainer">
+          {!todo.completed ? <img src="src/assets/edit.svg" /> : null}
+          <img
+            src="src/assets/delete.svg"
+            onClick={() => deleteTodo(todo.id)}
+          />
+        </div>
       </li>
     );
   });
 
-  return (
-    <>
-      <Link to="/new-todo" className="newTodoButton">
-        <h3>New Todo</h3>
-      </Link>
-      <ul>{todoList}</ul>
-    </>
-  );
+  return <ul>{todoList}</ul>;
 }

@@ -7,30 +7,21 @@ img {
   cursor: pointer;
 }
 
-.newTodoButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 180px;
-  height: 40px;
-  margin: 15px auto 0 auto;
-  text-decoration: none;
-  color: #c4cedb;
-  background-color: #1c2c42;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
 .todoItem {
   display: grid;
   align-items: center;
-  grid-template-columns: 30px 1fr 65px 30px 30px;
+  grid-template-columns: 30px 1fr 65px 70px;
   gap: 5px;
   min-height: 50px;
   margin-top: 10px;
   padding: 10px;
   line-height: 0.9;
   border-radius: 15px;
+}
+
+.todoEditDeleteContainer {
+  display: flex;
+  justify-self: end;
 }
 
 .incomplete {
@@ -47,6 +38,6 @@ img {
   }
 
   .todoItem {
-    grid-template-columns: 30px 1fr 55px 30px 30px;
+    grid-template-columns: 30px 1fr 55px 70px;
   }
 }
