@@ -8,6 +8,7 @@ let nextId = 1;
 export default function Root() {
   const [hideCompleted, setHideCompleted] = useState(false);
   const [visibleTodos, setVisibleTodos] = useState(getTodos(hideCompleted));
+  const [onNewTodo, setOnNewTodo] = useState(false);
 
   useEffect(() => {});
 
@@ -54,12 +55,20 @@ export default function Root() {
           <div className="titleContainer">
             <h1>ToDo IT</h1>
           </div>
-          <Link to="/new-todo" className="newTodoButton">
-            <img src="src/assets/add.svg" />
-            <h3>New Todo</h3>
-          </Link>
+          {!onNewTodo ? (
+            <Link
+              to="/new-todo"
+              onClick={() => setOnNewTodo(true)}
+              className="newTodoButton"
+            >
+              <img src="src/assets/add.svg" />
+              <h3>New Todo</h3>
+            </Link>
+          ) : null}
         </header>
-        <Outlet context={[visibleTodos, deleteTodo, toggleCompleted]} />
+        <Outlet
+          context={[visibleTodos, deleteTodo, toggleCompleted, setOnNewTodo]}
+        />
       </div>
       <footer>&copy;2023 - Matt Sobek</footer>
     </div>

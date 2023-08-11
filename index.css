@@ -16,6 +16,12 @@ h1 {
   color: #1c2c42;
 }
 
+h2 {
+  font-size: 2em;
+  font-weight: 800;
+  text-align: center;
+}
+
 h3 {
   font-size: 1.3em;
 }
